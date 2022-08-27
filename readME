@@ -1,0 +1,29 @@
+//to run the project
+nodemon
+
+//to test 
+npm run test
+
+//to make ts lint
+
+npm run tslint
+
+//to fix all issues with tslint
+
+npm run tslint-fix 
+
+//to check  pretier
+
+npm run prettier:check
+
+//to run pretier
+
+npm run prettier:write
+
+image you will add it ==>  hn.png
+
+
+
+localhost:3000 ==>will to to landing page
+localhost:3000/resize-img  ==>will go to the message route if there any validation
+or ro to route to display image
