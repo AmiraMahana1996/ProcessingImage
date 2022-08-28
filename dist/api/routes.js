@@ -18,7 +18,7 @@ const resize_img_1 = require("../controllers/resize-img");
 const cacge_middleware_1 = __importDefault(require("../middlewares/cacge.middleware"));
 const router = express_1.Router();
 // server side routes
-router.get('api/images', cacge_middleware_1.default(300), validation_middleware_1.validationMiddelware, resize_img_1.resizeImage);
+router.get('/api/images', cacge_middleware_1.default(300), validation_middleware_1.validationMiddelware, resize_img_1.resizeImage);
 // call handel
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({ message: 'Server is running and you can call apis.' });
