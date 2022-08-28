@@ -10,7 +10,6 @@
     "dist": "tsc -p .",
     "dev": "nodemon ./src/server.ts",
     "type": "module",
-    "lint": "eslint . --fix",
     "tslint-fix": "tslint --fix --project ./tsconfig.json",
     "tslint": "tslint --project tsconfig.json",
     "prettier:base": "prettier --parser typescript --single-quote",
