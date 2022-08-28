@@ -15,10 +15,11 @@ export const resizeImage = async (req: Request, res: Response) => {
         height: Number(height),
       })
 
-      .toFile(`${path.resolve('./')}/assets/modified-images/hn-resized.png`)
-      .then(() => {
+      .toFile(`${path.resolve('./')}/assets/modified-images/${filename}_${width}_${height}.png`)
+      .then((file) => {
+        console.log(file)
         res.sendFile(
-          path.resolve(`assets/modified-images/${filename}-resized.png`)
+          path.resolve(`assets/modified-images/${filename}_${file.width}_${file.height}.png`)
         );
       });
   }
