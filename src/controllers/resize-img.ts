@@ -17,7 +17,6 @@ export const resizeImage = async (req: Request, res: Response) => {
 
       .toFile(`${path.resolve('./')}/assets/modified-images/${filename}_${width}_${height}.png`)
       .then((file) => {
-        console.log(file)
         res.sendFile(
           path.resolve(`assets/modified-images/${filename}_${file.width}_${file.height}.png`)
         );
