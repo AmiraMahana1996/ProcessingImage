@@ -17,27 +17,25 @@ const sharp_1 = __importDefault(require("sharp"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 exports.resizeImage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, height, width } = req.body;
-    if (!fs_1.default.existsSync(`${path_1.default.resolve('./')}/assets/images/${name}`)) {
-        req.flash('message', `This image doesn't exist`);
-        res.redirect('/message');
+    const { filename, width, height } = req.query;
+    if (!fs_1.default.existsSync(`${path_1.default.resolve('./')}/assets/images/${filename}.png`)) {
+        res.json({ message: `This image doesn't exist` });
     }
     else {
         try {
-            yield sharp_1.default(`${path_1.default.resolve('./')}/assets/images/hn.png`)
+            console.log();
+            yield sharp_1.default(`${path_1.default.resolve('./')}/assets/images/${filename}.png`)
                 .resize({
                 width: Number(width),
                 height: Number(height),
             })
                 .toFile(`${path_1.default.resolve('./')}/assets/modified-images/hn-resized.png`)
                 .then((data) => {
-                req.flash('message', 'Image resized successfully');
-                res.redirect('/modified-images/hn-resized.png');
+                res.sendFile(path_1.default.resolve(`assets/modified-images/${filename}-resized.png`));
             });
         }
         catch (error) {
             throw error;
         }
     }
-    // };
 });

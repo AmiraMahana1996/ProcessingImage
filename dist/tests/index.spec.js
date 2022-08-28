@@ -29,7 +29,7 @@ describe('Test endpoint response', () => {
             .post('/resize-img')
             .send({ name: 'img test' })
             .redirects(1);
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(404);
     }));
 });
 // test resize request with name and width without height
@@ -38,7 +38,7 @@ describe('Test endpoint response', () => {
         const response = yield request
             .post('/resize-img')
             .send({ name: 'img test', width: 10 });
-        expect(response.status).toBe(302);
+        expect(response.status).toBe(404);
     }));
 });
 // test resize request if width and height was string
@@ -47,7 +47,7 @@ describe('Test endpoint response', () => {
         const response = yield request
             .post('/resize-img')
             .send({ name: 'img test', width: '10', height: '50' });
-        expect(response.status).toBe(302);
+        expect(response.status).toBe(404);
     }));
 });
 // test resize request if height was string
@@ -62,7 +62,7 @@ describe('Test endpoint response', () => {
 describe('Test endpoint response', () => {
     it('post the /resize-img', () => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
-        const response = yield request
+        yield request
             .post('/resize-img')
             .send({ name: 'img test', width: 50, height: 50 })
             .redirects(1);

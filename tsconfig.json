@@ -116,18 +116,7 @@
   },
   "include":["./src","./assets"],
   "exclude":["node_modules","spec","dist"],
-  "assets": [
-    {
-      "include": "./assets",
-      "outDir": "dist/assets",
-      "watchAssets": true
-    },
-    {
-      "include": "./src/views",
-      "outDir": "dist/views",
-      "watchAssets": true
-    }
-  ],
+  
     //   "assets": [
     //   "**/*.hbs"
     // ],

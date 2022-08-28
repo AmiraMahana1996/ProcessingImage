@@ -1,23 +1,25 @@
 import { NextFunction, Request, Response } from 'express';
-import * as Joi from 'joi';
+import Joi from 'joi';
 
+import path from 'path';
 export const validationMiddelware = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const Schema = Joi.object({
-    name: Joi.string(),
-    height: Joi.number(),
+    filename: Joi.string(),
     width: Joi.number(),
+    height: Joi.number(),
   });
 
-  const val: any = Schema.validate(req.body).error?.message;
+  const val: any = Schema.validate(req.query).error?.message;
   if (val !== undefined) {
-    req.flash('message', val);
-    res.redirect('/message');
+    console.log(Schema.validate(req.query).error);
+    res.json(val);
+  } else {
+    next();
   }
-  next();
 };
 
 // the movie talk about suffring to achive the goal and satisfiction

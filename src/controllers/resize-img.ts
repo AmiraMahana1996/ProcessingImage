@@ -8,14 +8,14 @@ export const resizeImage = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, height, width } = req.body;
+  const { filename, width, height } = req.query;
 
-  if (!fs.existsSync(`${path.resolve('./')}/assets/images/${name}`)) {
-    req.flash('message', `This image doesn't exist`);
-    res.redirect('/message');
+  if (!fs.existsSync(`${path.resolve('./')}/assets/images/${filename}.png`)) {
+    res.json({ message: `This image doesn't exist` });
   } else {
     try {
-      await sharp(`${path.resolve('./')}/assets/images/hn.png`)
+      console.log();
+      await sharp(`${path.resolve('./')}/assets/images/${filename}.png`)
         .resize({
           width: Number(width),
           height: Number(height),
@@ -23,13 +23,12 @@ export const resizeImage = async (
 
         .toFile(`${path.resolve('./')}/assets/modified-images/hn-resized.png`)
         .then((data) => {
-          req.flash('message', 'Image resized successfully');
-          res.redirect('/modified-images/hn-resized.png');
+          res.sendFile(
+            path.resolve(`assets/modified-images/${filename}-resized.png`)
+          );
         });
     } catch (error) {
       throw error;
     }
   }
-
-  // };
 };
