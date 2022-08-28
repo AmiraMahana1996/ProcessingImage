@@ -7,7 +7,6 @@ const express_1 = __importDefault(require("express"));
 const routes_1 = __importDefault(require("./api/routes"));
 const path_1 = __importDefault(require("path"));
 const helmet_1 = __importDefault(require("helmet"));
-const connect_flash_1 = __importDefault(require("connect-flash"));
 const express_session_1 = __importDefault(require("express-session"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const PORT = 3000;
@@ -22,7 +21,6 @@ app.use(express_session_1.default({
 }));
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.json());
-app.use(connect_flash_1.default());
 // application routing
 app.use(routes_1.default);
 app.use(helmet_1.default({ crossOriginEmbedderPolicy: false, originAgentCluster: true }));

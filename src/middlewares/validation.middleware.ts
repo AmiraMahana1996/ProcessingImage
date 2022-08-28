@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
 
-import path from 'path';
 export const validationMiddelware = (
   req: Request,
   res: Response,
@@ -13,7 +12,7 @@ export const validationMiddelware = (
     height: Joi.number(),
   });
 
-  const val: any = Schema.validate(req.query).error?.message;
+  const val = Schema.validate(req.query).error?.message;
   if (val !== undefined) {
     console.log(Schema.validate(req.query).error);
     res.json(val);

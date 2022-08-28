@@ -18,6 +18,13 @@ describe('Test endpoint response', () => {
     expect(response.status).toBe(404);
   });
 });
+//landing
+describe('Test endpoint response', () => {
+  it('get the /api/images?filename=hn&width=50&height=50', async () => {
+    const response = await request.get('/');
+    expect(response.status).toBe(200);
+  });
+});
 // test resize request with name and width without height
 describe('Test endpoint response', () => {
   it('post the / resize', async () => {

@@ -1,8 +1,7 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import router from './api/routes';
 import path from 'path';
 import helmet from 'helmet';
-import flash from 'connect-flash';
 import session from 'express-session';
 
 import bodyParser from 'body-parser';
@@ -26,8 +25,6 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
-
-app.use(flash());
 
 // application routing
 

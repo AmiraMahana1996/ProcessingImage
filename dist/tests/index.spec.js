@@ -32,6 +32,13 @@ describe('Test endpoint response', () => {
         expect(response.status).toBe(404);
     }));
 });
+//landing
+describe('Test endpoint response', () => {
+    it('get the /api/images?filename=hn&width=50&height=50', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield request.get('/');
+        expect(response.status).toBe(200);
+    }));
+});
 // test resize request with name and width without height
 describe('Test endpoint response', () => {
     it('post the / resize', () => __awaiter(void 0, void 0, void 0, function* () {
