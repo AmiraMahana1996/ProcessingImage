@@ -20,28 +20,25 @@ const request = supertest_1.default(server_1.default);
 describe('Test endpoint response', () => {
     it('Status Codes tests', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request
-            .get('/api/images?filename=hn&width=500&height=500')
-            .query({ filename: 'hn', width: 500, height: 500 });
+            .get('/api/images?filename=hn&width=500&height=500');
         expect(response.status).toBe(200);
     }));
     //check all query params
     it('should enter width if undefined', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get('/api/images?filename=keyboard&height');
+        const response = yield request.get('/api/images?filename=hn&width=&height=45');
         expect(response.text).toBe('{"message":"You must enter width!"}');
     }));
     //check all query params
     it('should enter height if undefined', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request
-            .get('/api/images?filename=hn&width=500&height=')
-            .query({ filename: 'img test', width: 10 });
+            .get('/api/images?filename=hn&width=500&height=');
         expect(response.text).toBe('{"message":"You must enter height!"}');
     }));
-    //check width type
-    it('get', () => __awaiter(void 0, void 0, void 0, function* () {
+    //check all query params
+    it('should enter height if undefined', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request
-            .get('/api/images?filename=12&width=500&height="12"')
-            .query({ filename: 'img test', width: 10 });
-        expect(response.text).toBe('{"message":"width must be number!"}');
+            .get('/api/images?filename=&width=500&height=41');
+        expect(response.text).toBe('{"message":"You must enter filename!"}');
     }));
 });
 // test resize request if height was string

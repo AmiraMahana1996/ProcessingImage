@@ -2,22 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validationMiddelware = void 0;
 exports.validationMiddelware = (req, res, next) => {
-    if (req) {
-        const { filename, width, height } = req.query;
-        !filename
-            ? res.json({ message: 'You must enter filename!' })
-            : !width
-                ? res.json({ message: 'You must enter width!' })
-                : !height
-                    ? res.json({ message: 'You must enter height!' })
-                    : null;
-        if (filename && width && height) {
-            width !== 'number'
-                ? res.json({ message: 'width must be number!' })
-                : height !== 'number'
-                    ? res.json({ message: 'width must be number!' })
-                    : null;
-        }
+    const { filename, width, height } = req.query;
+    if (height === '') {
+        res.json({ message: 'You must enter height!' });
+    }
+    else if (filename === '') {
+        res.json({ message: 'You must enter filename!' });
+    }
+    else if (width === '') {
+        res.json({ message: 'You must enter width!' });
     }
     else {
         next();
