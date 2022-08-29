@@ -6,13 +6,17 @@
 
 // }
 
-import { Request, Response,NextFunction} from 'express';
+import { Request, Response, NextFunction } from 'express';
 import apicache from 'apicache';
 import fs from 'fs';
 import path from 'path';
 
 const cache = apicache.middleware;
-export const cacheMiddleware = (req: Request, res: Response,  next: NextFunction) => {
+export const cacheMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { filename, width, height } = req.query;
   if (
     fs.existsSync(
@@ -25,8 +29,8 @@ export const cacheMiddleware = (req: Request, res: Response,  next: NextFunction
       path.resolve(`assets/modified-images/${filename}_${width}_${height}.png`)
     );
   } else {
- cache(300);
- next()
+    cache(300);
+    next();
   }
 };
 export default cacheMiddleware;

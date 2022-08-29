@@ -32,8 +32,6 @@ describe('Test endpoint response', () => {
       .query({ filename: 'img test', width: 10 });
     expect(response.text).toBe('{"message":"width must be number!"}');
   });
-
-
 });
 
 // test resize request if height was string

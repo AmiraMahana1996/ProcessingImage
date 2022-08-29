@@ -4,13 +4,19 @@ exports.validationMiddelware = void 0;
 exports.validationMiddelware = (req, res, next) => {
     if (req) {
         const { filename, width, height } = req.query;
-        !filename ? res.json({ message: 'You must enter filename!' }) :
-            !width ? res.json({ message: 'You must enter width!' })
-                : !height ? res.json({ message: 'You must enter height!' }) : null;
+        !filename
+            ? res.json({ message: 'You must enter filename!' })
+            : !width
+                ? res.json({ message: 'You must enter width!' })
+                : !height
+                    ? res.json({ message: 'You must enter height!' })
+                    : null;
         if (filename && width && height) {
-            filename === 'number' ? res.json({ message: 'filename must be string!' })
-                : width !== 'number' ? res.json({ message: 'width must be number!' })
-                    : height !== 'number' ? res.json({ message: 'width must be number!' }) : null;
+            width !== 'number'
+                ? res.json({ message: 'width must be number!' })
+                : height !== 'number'
+                    ? res.json({ message: 'width must be number!' })
+                    : null;
         }
     }
     else {
