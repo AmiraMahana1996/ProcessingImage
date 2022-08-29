@@ -61,7 +61,7 @@ npm run compile-typescript
 http://localhost:3000/api/images?filename=hn&width=200&height=88
 ```
 the url contains three parameters :
-1. filename : `string` //for example hn.png<br /> 
+1. filename : `string` //for example hn<br /> 
 2. width : `number`  //for example 50<br />
 3. height : `number` //for example 60<br />
 
