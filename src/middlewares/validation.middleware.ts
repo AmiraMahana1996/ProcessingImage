@@ -1,25 +1,39 @@
 import { NextFunction, Request, Response } from 'express';
-import Joi from 'joi';
+
 
 export const validationMiddelware = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const Schema = Joi.object({
-    filename: Joi.string(),
-    width: Joi.number(),
-    height: Joi.number(),
-  });
+if(req){
+ const {filename,width,height}=req.query;
 
-  const val = Schema.validate(req.query).error?.message;
-  if (val !== undefined) {
-    console.log(Schema.validate(req.query).error);
-    res.json(val);
-  } else {
-    next();
-  }
-};
+!filename? res.json({message:'You must enter filename!'}):
+!width?res.json({message:'You must enter width!'})
+:!height?res.json({message:'You must enter height!'}):null;
+
+if(filename && width &&height)
+{
+
+  width !=='number'?res.json({message:'width must be number!'})
+  :height !=='number'? res.json({message:'width must be number!'}):null
+}
+
+}else{
+  next()
+}
+}
+// if(filename !=='string')
+// {
+//   res.json({message:'filename must be string!'})
+// }
+// else if(
+
+// )
+ 
+// };
+
 
 // the movie talk about suffring to achive the goal and satisfiction
 //

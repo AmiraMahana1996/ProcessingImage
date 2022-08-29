@@ -27,9 +27,9 @@ exports.resizeImage = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             width: Number(width),
             height: Number(height),
         })
-            .toFile(`${path_1.default.resolve('./')}/assets/modified-images/hn-resized.png`)
-            .then(() => {
-            res.sendFile(path_1.default.resolve(`assets/modified-images/${filename}-resized.png`));
+            .toFile(`${path_1.default.resolve('./')}/assets/modified-images/${filename}_${width}_${height}.png`)
+            .then((file) => {
+            res.sendFile(path_1.default.resolve(`assets/modified-images/${filename}_${file.width}_${file.height}.png`));
         });
     }
 });
