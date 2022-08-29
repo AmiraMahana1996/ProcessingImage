@@ -9,7 +9,7 @@ const Messages = (input) => {
     notFound: {
       error: true,
       status: 404,
-      message: ` ${input} Not Found`,
+      message: ` ${input} Not Found or invalid filename`,
     },
 
     invalidInput: {
@@ -31,6 +31,21 @@ const Messages = (input) => {
       error: true,
       status: 403,
       message: `Something Went Wrong `,
+    },
+    notalphabetic: {
+      error: true,
+      status: 404,
+      message: 'filename must contain only alphabetic characters!',
+    },
+    DimNotNumber: {
+      error: true,
+      status: 404,
+      message: 'Should width and height not contain alphabetic characters !',
+    },
+    NotNumber: {
+      error: true,
+      status: 404,
+      message: 'Should filename not contain any numbers !',
     },
   };
 };

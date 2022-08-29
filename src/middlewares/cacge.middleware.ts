@@ -8,7 +8,7 @@ export const cacheMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   const { filename, width, height } = req.query;
   if (
     fs.existsSync(

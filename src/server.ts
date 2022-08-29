@@ -1,8 +1,6 @@
 import express from 'express';
 import router from './api/routes';
 import path from 'path';
-import helmet from 'helmet';
-import session from 'express-session';
 
 import bodyParser from 'body-parser';
 
@@ -14,14 +12,6 @@ app.use(express.static(path.join('assets')));
 
 app.use(express.json({ type: 'application/json' }));
 
-app.use(
-  session({
-    secret: 'flashblog',
-    saveUninitialized: true,
-    resave: true,
-  })
-);
-
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
@@ -29,17 +19,6 @@ app.use(express.json());
 // application routing
 
 app.use(router);
-
-app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }));
-
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      'img-src': ["'self'", 'https: data: blob:'],
-    },
-  })
-);
 
 app.listen(PORT, () => {
   console.log(`Servert running on ${PORT}`);

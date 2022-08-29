@@ -33,6 +33,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resizeImage = void 0;
 const sharp_1 = __importDefault(require("sharp"));
+const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const fsExtra = __importStar(require("fs-extra"));
 exports.resizeImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -40,18 +41,18 @@ exports.resizeImage = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     // remove all images from modefied folder images
     fsExtra.emptyDirSync(`${path_1.default.resolve('./')}/assets/modified-images/`);
     //start resizing
-    yield sharp_1.default(`${path_1.default.resolve('./')}/assets/images/${filename}.png`)
-        .resize({
-        width: Number(width),
-        height: Number(height),
-    })
-        .toFile(`${path_1.default.resolve('./')}/assets/modified-images/${filename}_${width}_${height}.png`)
-        .then((file) => {
-        // fs.unlinkSync(
-        //   path.resolve(
-        //     `assets/modified-images/${filename}_${regex}_${regex}.png`
-        //   )
-        // );
-        res.sendFile(path_1.default.resolve(`assets/modified-images/${filename}_${file.width}_${file.height}.png`));
-    });
+    if (fs_1.default.existsSync(`${path_1.default.resolve('./')}/assets/images/${filename}.png`)) {
+        yield sharp_1.default(`${path_1.default.resolve('./')}/assets/images/${filename}.png`)
+            .resize({
+            width: Number(width),
+            height: Number(height),
+        })
+            .toFile(`${path_1.default.resolve('./')}/assets/modified-images/${filename}_${width}_${height}.png`)
+            .then((file) => {
+            res.sendFile(path_1.default.resolve(`assets/modified-images/${filename}_${file.width}_${file.height}.png`));
+        });
+    }
+    else {
+        res.status(404);
+    }
 });

@@ -1,13 +1,11 @@
-import { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import Messages from '../messages/messages';
 import invalidOptionValidation from '../validation/validation.rules';
 export const validationMiddelware = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  //convert type of width and height
-
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+): void => {
   const data = {
     filename: req.query.filename,
     width: req.query.width,
@@ -18,24 +16,34 @@ export const validationMiddelware = (
   for (const [key, value] of Object.entries(data)) {
     switch (invalidOptionValidation(data)) {
       case 'nullOrZero':
-        return res.status(404).json(Messages(key).invalidInput);
-
+        res.status(404).json(Messages(key).invalidInput);
+        break;
       case 'empty':
-        return res.status(404).json(Messages(value).requiredInput);
-
+        res.status(404).json(Messages(value).requiredInput);
+        break;
       case 'negativeValue':
-        return res.status(404).json(Messages(key).negativeValue);
+        res.status(404).send(Messages(key).negativeValue);
+        break;
       case 'notFound':
-        return res.status(404).json(Messages(key).notFound);
+        res.status(404).json(Messages(key).notFound);
+        break;
       case 'required':
-        return res.json(Messages(data).requiredInput);
-      case 'valid':
-        next();
-        return res.status(200);
+        res.status(404).json(Messages(data).requiredInput);
+        break;
+      case 'notalphabetic':
+        res.status(404).json(Messages(data).notalphabetic);
+        break;
+      case 'NotNumber':
+        res.status(404).json(Messages(data).NotNumber);
+
+        break;
+      case 'DimNotNumber':
+        res.status(404).json(Messages(data).DimNotNumber);
+
+        break;
       default:
         next();
     }
-    return;
+    break;
   }
-  next();
 };
