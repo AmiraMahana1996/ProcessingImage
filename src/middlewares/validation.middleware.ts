@@ -7,34 +7,35 @@ export const validationMiddelware = (
   next: NextFunction
 ) => {
   //convert type of width and height
-  console.log(req.query);
+
   const data = {
     filename: req.query.filename,
     width: req.query.width,
     height: req.query.height,
   };
 
-  console.log(data);
+  //validation
   for (const [key, value] of Object.entries(data)) {
-    console.log(value);
     switch (invalidOptionValidation(data)) {
       case 'nullOrZero':
-        return res.send(Messages(key).invalidInput);
+        return res.status(404).json(Messages(key).invalidInput);
 
       case 'empty':
-        return res.send(Messages(key).requiredInput);
+        return res.status(404).json(Messages(value).requiredInput);
 
       case 'negativeValue':
-        return res.send(Messages(key).negativeValue);
+        return res.status(404).json(Messages(key).negativeValue);
       case 'notFound':
-        return res.send(Messages(key).notFound);
+        return res.status(404).json(Messages(key).notFound);
       case 'required':
-        return res.send(Messages(data).requiredInput);
+        return res.json(Messages(data).requiredInput);
+      case 'valid':
+        next();
+        return res.status(200);
       default:
         next();
     }
     return;
   }
   next();
-  // const element = array[index];
 };

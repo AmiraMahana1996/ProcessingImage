@@ -1,11 +1,3 @@
-// import apicache from 'apicache';
-
-// const cache = apicache.middleware;
-
-// if (!fs.existsSync(`${path.resolve('./')}/assets/images/${filename}_${width}_${height}.png`)){
-
-// }
-
 import { Request, Response, NextFunction } from 'express';
 import apicache from 'apicache';
 import fs from 'fs';
